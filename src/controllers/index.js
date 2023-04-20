@@ -2,15 +2,15 @@ const validateTodo = require("../../utils/validations/todo");
 const Todo = require("../model/task");
 
 const getAll = async (req, res) => {
+  const { user } = req.payload;
   try {
-    const list = await Todo.find();
+    const list = await Todo.find({ user: user });
 
     res.status(200).send({ success: true, message: list });
-    return;
   } catch (error) {
     throw new Error(error);
-    return;
   }
+  return;
 };
 
 const createTodo = async (req, res) => {
@@ -23,6 +23,7 @@ const createTodo = async (req, res) => {
 
   try {
     value.valid = Date.now() + 1000 * 60 * 60 * 3;
+    value.user = req.payload.user;
 
     await Todo.create(value);
 
