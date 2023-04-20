@@ -6,10 +6,11 @@ const getAll = async (req, res) => {
     const list = await Todo.find();
 
     res.status(200).send({ success: true, message: list });
+    return;
   } catch (error) {
     throw new Error(error);
+    return;
   }
-  return;
 };
 
 const createTodo = async (req, res) => {

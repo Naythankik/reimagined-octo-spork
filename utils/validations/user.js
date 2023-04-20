@@ -13,4 +13,16 @@ const userValidation = (body) => {
   return user.validate(body);
 };
 
-module.exports = userValidation;
+const loginValidation = (body) => {
+  const login = Joi.object({
+    email: Joi.string().email().required(),
+    password: Joi.string().required(),
+  });
+
+  return login.validate(body);
+};
+
+module.exports = {
+  userValidation,
+  loginValidation,
+};
