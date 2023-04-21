@@ -22,7 +22,6 @@ const createTodo = async (req, res) => {
   }
 
   try {
-    value.valid = Date.now() + 1000 * 60 * 60 * 3;
     value.user = req.payload.user;
 
     await Todo.create(value);
